@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page_title">Hesham Hane | مصمم جرافيك وبناء هويات بصرية</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Cinzel+Decorative:wght@700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { 400: '#F3E5AB', 500: '#D4AF37', 600: '#AA7C11' },
+            darkBg: '#080808',
+            darkCard: '#121212'
+          },
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            cinzel: ['Cinzel Decorative', 'serif'],
+            tajawal: ['Tajawal', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { background-color: #080808; color: #E5E5E5; font-family: 'Cairo', sans-serif; }
+    .gold-gradient { background: linear-gradient(135deg, #FFF099 0%, #D4AF37 50%, #AA7C11 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .gold-border { border: 1px solid rgba(212, 175, 55, 0.3); }
+    .gold-border:hover { border-color: rgba(212, 175, 55, 0.8); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+    .glow-h { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3); }
+    /* Custom Message Box for non-alert validation */
+    #custom-msg { transition: all 0.3s ease; }
+  </style>
+</head>
+<body class="bg-[#080808] text-gray-200">
+
+  <!-- Floating Custom Toast Notification (Replaces alert()) -->
+  <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#121212] gold-border px-6 py-3 rounded-2xl shadow-2xl text-gold-400 text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300">
+    <span id="toast-message">تم بنجاح</span>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-[#080808]/90 backdrop-blur-md border-b border-gold-500/20">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="font-cinzel text-xl md:text-2xl font-bold gold-gradient tracking-wider">Hesham Hane</a>
+      
+      <nav class="hidden md:flex space-x-8 space-x-reverse text-sm font-medium">
+        <a href="#about" class="hover:text-gold-500 transition" data-i18n="nav_about">عنّي</a>
+        <a href="#skills" class="hover:text-gold-500 transition" data-i18n="nav_skills">المهارات</a>
+        <a href="#portfolio" class="hover:text-gold-500 transition" data-i18n="nav_portfolio">معرض الأعمال</a>
+        <a href="#testimonials" class="hover:text-gold-500 transition" data-i18n="nav_testimonials">آراء العملاء</a>
+        <a href="#contact" class="hover:text-gold-500 transition" data-i18n="nav_contact">تواصل معي</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <!-- Language Toggle Button -->
+        <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-full border border-gold-500/40 text-gold-400 hover:bg-gold-500/10 text-xs font-bold transition flex items-center gap-1.5" title="Switch Language / تغيير اللغة">
+          <i class="fas fa-globe"></i> <span id="lang-label">EN</span>
+        </button>
+
+        <a id="nav-whatsapp-btn" href="https://wa.me/201118313357" target="_blank" class="hidden sm:flex px-4 py-2 rounded-full border border-green-500/50 text-green-400 hover:bg-green-500/10 text-xs font-semibold items-center gap-2 transition">
+          <i class="fab fa-whatsapp text-sm"></i> <span data-i18n="whatsapp_text">واتساب</span>
+        </a>
+
+        <button onclick="openAdminModal()" class="p-2.5 rounded-full border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 text-xs transition" title="لوحة التحكم الخاصة">
+          <i class="fas fa-user-shield text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center pt-24 px-6 text-center relative overflow-hidden">
+    <div class="max-w-4xl mx-auto z-10">
+      <h2 class="text-gold-500 text-lg md:text-xl font-tajawal mb-3 tracking-widest" data-i18n="hero_sub">أهلاً بك في عالم الإبداع البصري</h2>
+      <h1 class="text-5xl md:text-7xl font-bold font-cinzel gold-gradient mb-6 leading-tight">Hesham Hane</h1>
+      <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" data-i18n="hero_desc">
+        مصمم جرافيك متأصل الخبرة ومتخصص في بناء الهويات البصرية، تصميم الشعارات، وإعلانات السوشيال ميديا بأسلوب فني واحترافي.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#portfolio" class="px-8 py-3 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-black font-bold hover:opacity-90 transition shadow-lg shadow-gold-500/10" data-i18n="hero_btn_explore">استعراض الأعمال</a>
+        <a id="hero-whatsapp-btn" href="https://wa.me/201118313357" target="_blank" class="px-8 py-3 rounded-full border border-green-500/50 text-green-400 hover:bg-green-500/10 transition flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp"></i> <span data-i18n="hero_btn_wa">تواصل عبر الواتساب</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 bg-[#0d0d0d] border-t border-b border-gold-500/10">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="flex justify-center relative">
+        <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-[#121212] gold-border flex items-center justify-center relative overflow-hidden p-6">
+          <span class="font-cinzel text-9xl font-bold gold-gradient glow-h select-none">H</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-gold-500 text-sm font-semibold tracking-wider mb-2" data-i18n="about_tag">عن المصمم</h3>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6" data-i18n="about_title">هشام هاني — رؤية تميز علامتك</h2>
+        <p class="text-gray-400 leading-relaxed mb-6" data-i18n="about_desc">
+          أقدم حلولاً تصميمية مبتكرة تسهم في إبراز الهوية البصرية للشركات والأفراد بشكل فاخر وجذاب. أمتلك خبرة متخصصة في ابتكار التصاميم التي تلتقط الأنظار وتترك أثراً مستداماً.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-4 bg-[#121212] rounded-xl gold-border">
+            <h4 class="text-gold-400 font-bold mb-1" data-i18n="about_box1_title">الهويات البصرية</h4>
+            <p class="text-xs text-gray-500" data-i18n="about_box1_desc">تصميم شعارات ودلائل هوية شاملة</p>
+          </div>
+          <div class="p-4 bg-[#121212] rounded-xl gold-border">
+            <h4 class="text-gold-400 font-bold mb-1" data-i18n="about_box2_title">السوشيال ميديا</h4>
+            <p class="text-xs text-gray-500" data-i18n="about_box2_desc">إعلانات وتصاميم تفاعلية مبتكرة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills & Services Section -->
+  <section id="skills" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto text-center">
+      <h3 class="text-gold-500 text-sm font-semibold tracking-wider mb-2" data-i18n="skills_tag">الخدمات والمهارات</h3>
+      <h2 class="text-3xl md:text-4xl font-bold mb-12" data-i18n="skills_title">التخصصات والخدمات الفنية</h2>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-pen-nib text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_1_title">تصميم الشعارات</h4>
+          <p class="text-xs text-gray-400">Logo Design</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-rectangle-ad text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_2_title">إعلانات السوشيال</h4>
+          <p class="text-xs text-gray-400">Social Media Ads</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-image text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_3_title">الصور المصغرة</h4>
+          <p class="text-xs text-gray-400">Thumbnails</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-address-card text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_4_title">بيزنس كارد</h4>
+          <p class="text-xs text-gray-400">Business Cards</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-copyright text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_5_title">العلامات التجارية</h4>
+          <p class="text-xs text-gray-400">Branding</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-utensils text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_6_title">قائمة المطاعم</h4>
+          <p class="text-xs text-gray-400">Restaurant Menus</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-child text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_7_title">رسوم للأطفال</h4>
+          <p class="text-xs text-gray-400">Children Illustrations</p>
+        </div>
+        <div class="p-6 bg-[#121212] rounded-2xl gold-border">
+          <i class="fa-solid fa-palette text-3xl text-gold-500 mb-4"></i>
+          <h4 class="font-bold text-lg mb-1" data-i18n="skill_8_title">الفنون الرقمية</h4>
+          <p class="text-xs text-gray-400">Digital Art</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="py-20 px-6 bg-[#0d0d0d] border-t border-b border-gold-500/10">
+    <div class="max-w-6xl mx-auto text-center">
+      <h3 class="text-gold-500 text-sm font-semibold tracking-wider mb-2" data-i18n="portfolio_tag">معرض الأعمال</h3>
+      <h2 class="text-3xl md:text-4xl font-bold mb-8" data-i18n="portfolio_title">نماذج من أعمالي (صور وفيديوهات)</h2>
+
+      <!-- Dynamic Portfolio Grid -->
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-right"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h3 class="text-gold-500 text-sm font-semibold tracking-wider mb-2" data-i18n="testi_tag">آراء العملاء</h3>
+        <h2 class="text-3xl md:text-4xl font-bold" data-i18n="testi_title">تقييمات وتعليقات الزوار</h2>
+      </div>
+
+      <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 text-right">
+        <div class="p-6 bg-[#121212] rounded-xl gold-border">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="font-bold text-gold-400">أحمد مصطفى</h4>
+            <div class="text-yellow-500 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          </div>
+          <p class="text-gray-400 text-sm">تصميم الشعار كان ممتازاً وجذاباً للغاية، والالتزام بالمواعيد احترافي جداً.</p>
+        </div>
+      </div>
+
+      <div class="p-8 bg-[#121212] rounded-2xl gold-border text-right">
+        <h3 class="text-xl font-bold mb-6 text-gold-400 text-center" data-i18n="review_form_title">أضف رأيك وتقييمك</h3>
+        <form id="comment-form" onsubmit="addComment(event)">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input type="text" id="reviewer-name" placeholder="اسمك الكريم / Your Name" required class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl focus:border-gold-500 outline-none text-sm">
+            <select id="reviewer-rating" class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl focus:border-gold-500 outline-none text-sm text-gray-300">
+              <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+              <option value="4">⭐⭐⭐⭐ (4/5)</option>
+              <option value="3">⭐⭐⭐ (3/5)</option>
+            </select>
+          </div>
+          <textarea id="reviewer-text" rows="3" placeholder="اكتب رأيك أو تجربتك هنا... / Write your feedback..." required class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl focus:border-gold-500 outline-none text-sm mb-4"></textarea>
+          <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold rounded-xl hover:opacity-90 transition" data-i18n="review_submit_btn">نشر التعليق</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 bg-[#0d0d0d] border-t border-gold-500/10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-gold-500 text-sm font-semibold tracking-wider mb-2" data-i18n="contact_tag">التواصل المباشر</h3>
+      <h2 class="text-3xl md:text-4xl font-bold mb-8" data-i18n="contact_title">بدء مشروعك الجديد</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div class="p-8 bg-[#121212] rounded-2xl gold-border">
+          <i class="fab fa-whatsapp text-4xl text-green-500 mb-4"></i>
+          <h4 class="text-lg font-bold mb-2" data-i18n="contact_wa_title">محادثة واتساب</h4>
+          <a id="contact-whatsapp" href="https://wa.me/201118313357" target="_blank" class="text-gold-400 font-mono text-lg hover:underline dir-ltr inline-block">01118313357</a>
+        </div>
+        <div class="p-8 bg-[#121212] rounded-2xl gold-border">
+          <i class="fas fa-envelope text-4xl text-gold-500 mb-4"></i>
+          <h4 class="text-lg font-bold mb-2" data-i18n="contact_email_title">البريد الإلكتروني الرسمي</h4>
+          <a id="contact-email" href="mailto:hdhdhddiidir@gmail.com" class="text-gold-400 font-mono text-sm hover:underline dir-ltr inline-block">hdhdhddiidir@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-xs text-gray-500 border-t border-gold-500/10">
+    <p data-i18n="footer_copy">© 2026 Hesham Hane. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <!-- Admin Control Panel Modal -->
+  <div id="admin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#121212] gold-border rounded-2xl w-full max-w-2xl p-6 relative max-h-[90vh] overflow-y-auto text-right">
+      <button onclick="closeAdminModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white text-xl">&times;</button>
+      
+      <!-- Login Screen -->
+      <div id="admin-auth-box" class="text-center py-6">
+        <i class="fas fa-shield-halved text-4xl text-gold-500 mb-4"></i>
+        <h3 class="text-xl font-bold mb-4" data-i18n="admin_login_title">لوحة التحكم الخاصة - Hesham Hane</h3>
+        <input type="password" id="admin-pass" placeholder="أدخل كلمة المرور (Password)" class="w-full px-4 py-3 bg-[#080808] border border-gold-500/30 rounded-xl mb-4 text-center text-sm outline-none text-white tracking-widest">
+        <button onclick="loginAdmin()" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold rounded-xl hover:opacity-90 transition" data-i18n="admin_login_btn">دخول اللوحة</button>
+      </div>
+
+      <!-- Panel Management Content -->
+      <div id="admin-panel-content" class="hidden">
+        <div class="flex border-b border-gold-500/20 mb-6 pb-2 gap-4">
+          <button onclick="switchTab('works')" id="tab-works-btn" class="text-gold-400 font-bold text-sm pb-1 border-b-2 border-gold-500" data-i18n="admin_tab_works">إدارة الأعمال (صور/فيديو)</button>
+          <button onclick="switchTab('settings')" id="tab-settings-btn" class="text-gray-400 text-sm pb-1" data-i18n="admin_tab_settings">تعديل بيانات التواصل</button>
+        </div>
+
+        <!-- Tab 1: Works Management -->
+        <div id="tab-works-content">
+          <h3 class="text-lg font-bold text-gold-400 mb-4" id="panel-form-title" data-i18n="admin_form_new">إضافة عمل جديد (صورة أو فيديو)</h3>
+          <form id="admin-work-form" onsubmit="saveProject(event)">
+            <input type="hidden" id="edit-work-id">
+            <div class="space-y-4 mb-4">
+              <input type="text" id="work-title" placeholder="عنوان العمل (مثال: الهوية البصرية الملكية)" required class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm">
+              <input type="text" id="work-category" placeholder="التخصص (شعارات، سوشيال ميديا، موشن...)" required class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm">
+              <select id="work-type" class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm text-gray-300">
+                <option value="image">صورة (Image)</option>
+                <option value="video">فيديو (Video / YouTube)</option>
+              </select>
+              <input type="url" id="work-media-url" placeholder="رابط الملف أو الفيديو (YouTube / رابط مباشر)" class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm">
+              <div class="text-xs text-gray-500 text-center" data-i18n="admin_or_upload">أو رفع ملف (صورة/فيديو) من جهازك مباشرة:</div>
+              <input type="file" id="work-media-file" accept="image/*,video/*" class="w-full text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-gold-500 file:text-black file:font-bold">
+              <textarea id="work-desc" rows="2" placeholder="وصف قصير للعمل..." class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm"></textarea>
+            </div>
+            <div class="flex gap-3">
+              <button type="submit" id="submit-btn" class="flex-1 py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold rounded-xl transition" data-i18n="admin_save_btn">حفظ العمل</button>
+              <button type="button" id="cancel-edit-btn" onclick="resetAdminForm()" class="hidden py-3 px-6 bg-gray-800 text-white font-bold rounded-xl" data-i18n="admin_cancel_btn">إلغاء</button>
+            </div>
+          </form>
+
+          <hr class="border-gold-500/20 my-6">
+          <h4 class="font-bold text-sm text-gold-400 mb-4" data-i18n="admin_existing_works">الأعمال الحالية</h4>
+          <div id="admin-works-list" class="space-y-3"></div>
+        </div>
+
+        <!-- Tab 2: Settings Management -->
+        <div id="tab-settings-content" class="hidden">
+          <h3 class="text-lg font-bold text-gold-400 mb-4" data-i18n="admin_settings_title">تعديل معلومات التواصل والبريد</h3>
+          <form onsubmit="saveSettings(event)" class="space-y-4">
+            <div>
+              <label class="text-xs text-gray-400 block mb-1" data-i18n="admin_whatsapp_label">رقم الواتساب (بالصيغة الدولية بدون +):</label>
+              <input type="text" id="setting-whatsapp" placeholder="201118313357" required class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm">
+            </div>
+            <div>
+              <label class="text-xs text-gray-400 block mb-1" data-i18n="admin_email_label">البريد الإلكتروني الرسمي:</label>
+              <input type="email" id="setting-email" placeholder="hdhdhddiidir@gmail.com" required class="w-full px-4 py-3 bg-[#080808] border border-gold-500/20 rounded-xl outline-none text-sm">
+            </div>
+            <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-black font-bold rounded-xl" data-i18n="admin_save_changes">حفظ التغييرات</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dictionary for Bilingual Support (Arabic / English)
+    const translations = {
+      ar: {
+        page_title: "Hesham Hane | مصمم جرافيك وبناء هويات بصرية",
+        nav_about: "عنّي",
+        nav_skills: "المهارات",
+        nav_portfolio: "معرض الأعمال",
+        nav_testimonials: "آراء العملاء",
+        nav_contact: "تواصل معي",
+        whatsapp_text: "واتساب",
+        hero_sub: "أهلاً بك في عالم الإبداع البصري",
+        hero_desc: "مصمم جرافيك متأصل الخبرة ومتخصص في بناء الهويات البصرية، تصميم الشعارات، وإعلانات السوشيال ميديا بأسلوب فني واحترافي.",
+        hero_btn_explore: "استعراض الأعمال",
+        hero_btn_wa: "تواصل عبر الواتساب",
+        about_tag: "عن المصمم",
+        about_title: "هشام هاني — رؤية تميز علامتك",
+        about_desc: "أقدم حلولاً تصميمية مبتكرة تسهم في إبراز الهوية البصرية للشركات والأفراد بشكل فاخر وجذاب. أمتلك خبرة متخصصة في ابتكار التصاميم التي تلتقط الأنظار وتترك أثراً مستداماً.",
+        about_box1_title: "الهويات البصرية",
+        about_box1_desc: "تصميم شعارات ودلائل هوية شاملة",
+        about_box2_title: "السوشيال ميديا",
+        about_box2_desc: "إعلانات وتصاميم تفاعلية مبتكرة",
+        skills_tag: "الخدمات والمهارات",
+        skills_title: "التخصصات والخدمات الفنية",
+        skill_1_title: "تصميم الشعارات",
+        skill_2_title: "إعلانات السوشيال",
+        skill_3_title: "الصور المصغرة",
+        skill_4_title: "بيزنس كارد",
+        skill_5_title: "العلامات التجارية",
+        skill_6_title: "قائمة المطاعم",
+        skill_7_title: "رسوم للأطفال",
+        skill_8_title: "الفنون الرقمية",
+        portfolio_tag: "معرض الأعمال",
+        portfolio_title: "نماذج من أعمالي (صور وفيديوهات)",
+        testi_tag: "آراء العملاء",
+        testi_title: "تقييمات وتعليقات الزوار",
+        review_form_title: "أضف رأيك وتقييمك",
+        review_submit_btn: "نشر التعليق",
+        contact_tag: "التواصل المباشر",
+        contact_title: "بدء مشروعك الجديد",
+        contact_wa_title: "محادثة واتساب",
+        contact_email_title: "البريد الإلكتروني الرسمي",
+        footer_copy: "© 2026 Hesham Hane. جميع الحقوق محفوظة.",
+        admin_login_title: "لوحة التحكم الخاصة - Hesham Hane",
+        admin_login_btn: "دخول اللوحة",
+        admin_tab_works: "إدارة الأعمال",
+        admin_tab_settings: "إعدادات التواصل",
+        admin_form_new: "إضافة عمل جديد (صورة أو فيديو)",
+        admin_or_upload: "أو رفع ملف من جهازك مباشرة:",
+        admin_save_btn: "حفظ العمل",
+        admin_cancel_btn: "إلغاء",
+        admin_existing_works: "الأعمال الحالية",
+        admin_settings_title: "تعديل معلومات التواصل والبريد",
+        admin_whatsapp_label: "رقم الواتساب (بالصيغة الدولية بدون +):",
+        admin_email_label: "البريد الإلكتروني الرسمي:",
+        admin_save_changes: "حفظ التغييرات"
+      },
+      en: {
+        page_title: "Hesham Hane | Graphic Designer & Brand Identity Specialist",
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_portfolio: "Portfolio",
+        nav_testimonials: "Testimonials",
+        nav_contact: "Contact",
+        whatsapp_text: "WhatsApp",
+        hero_sub: "Welcome to the World of Visual Creativity",
+        hero_desc: "An experienced graphic designer specialized in building brand identities, custom logos, and engaging social media advertisements with professional flair.",
+        hero_btn_explore: "Explore Portfolio",
+        hero_btn_wa: "Chat on WhatsApp",
+        about_tag: "About Designer",
+        about_title: "Hesham Hane — Elevating Your Brand Vision",
+        about_desc: "I deliver innovative design solutions that highlight brand identities for companies and individuals with a luxurious touch. Specialized in creating striking, memorable visual assets.",
+        about_box1_title: "Brand Identity",
+        about_box1_desc: "Logo design & comprehensive guidelines",
+        about_box2_title: "Social Media",
+        about_box2_desc: "Interactive ads & creative graphics",
+        skills_tag: "Services & Skills",
+        skills_title: "Expertise & Technical Services",
+        skill_1_title: "Logo Design",
+        skill_2_title: "Social Media Ads",
+        skill_3_title: "Thumbnails",
+        skill_4_title: "Business Cards",
+        skill_5_title: "Branding",
+        skill_6_title: "Restaurant Menus",
+        skill_7_title: "Children Illustration",
+        skill_8_title: "Digital Art",
+        portfolio_tag: "Portfolio",
+        portfolio_title: "Featured Works (Images & Videos)",
+        testi_tag: "Testimonials",
+        testi_title: "Client Reviews & Feedback",
+        review_form_title: "Add Your Review",
+        review_submit_btn: "Submit Review",
+        contact_tag: "Direct Contact",
+        contact_title: "Start Your New Project",
+        contact_wa_title: "WhatsApp Chat",
+        contact_email_title: "Official Email Address",
+        footer_copy: "© 2026 Hesham Hane. All rights reserved.",
+        admin_login_title: "Admin Control Panel - Hesham Hane",
+        admin_login_btn: "Login Panel",
+        admin_tab_works: "Manage Works",
+        admin_tab_settings: "Contact Settings",
+        admin_form_new: "Add New Project (Image/Video)",
+        admin_or_upload: "Or upload file directly:",
+        admin_save_btn: "Save Project",
+        admin_cancel_btn: "Cancel",
+        admin_existing_works: "Current Works",
+        admin_settings_title: "Update Contact & Email Details",
+        admin_whatsapp_label: "WhatsApp Number (International without +):",
+        admin_email_label: "Official Email Address:",
+        admin_save_changes: "Save Changes"
+      }
+    };
+
+    let currentLang = localStorage.getItem('hesham_lang') || 'ar';
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-message').innerText = msg;
+      box.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        box.classList.add('opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      localStorage.setItem('hesham_lang', currentLang);
+      applyLanguage();
+    }
+
+    function applyLanguage() {
+      const htmlTag = document.documentElement;
+      htmlTag.setAttribute('lang', currentLang);
+      htmlTag.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+      document.getElementById('lang-label').innerText = currentLang === 'ar' ? 'EN' : 'AR';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(translations[currentLang][key]) {
+          el.innerText = translations[currentLang][key];
+        }
+      });
+    }
+
+    let defaultSettings = { whatsapp: "201118313357", email: "hdhdhddiidir@gmail.com" };
+    let siteSettings = JSON.parse(localStorage.getItem('hesham_settings')) || defaultSettings;
+    let myProjects = JSON.parse(localStorage.getItem('hesham_projects')) || [
+      { id: 1, title: "Royal Brand Identity", category: "Branding", type: "image", desc: "Luxurious brand identity concept with gold accents.", media: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" },
+      { id: 2, title: "Social Media Campaign", category: "Social Media", type: "image", desc: "High-end promotional graphics for digital marketing.", media: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" }
+    ];
+
+    function applySettings() {
+      document.getElementById('contact-whatsapp').innerText = siteSettings.whatsapp;
+      document.getElementById('contact-whatsapp').href = `https://wa.me/${siteSettings.whatsapp}`;
+      document.getElementById('nav-whatsapp-btn').href = `https://wa.me/${siteSettings.whatsapp}`;
+      document.getElementById('hero-whatsapp-btn').href = `https://wa.me/${siteSettings.whatsapp}`;
+
+      document.getElementById('contact-email').innerText = siteSettings.email;
+      document.getElementById('contact-email').href = `mailto:${siteSettings.email}`;
+
+      document.getElementById('setting-whatsapp').value = siteSettings.whatsapp;
+      document.getElementById('setting-email').value = siteSettings.email;
+    }
+
+    function renderPortfolio() {
+      const grid = document.getElementById('portfolio-grid');
+      const adminList = document.getElementById('admin-works-list');
+      grid.innerHTML = '';
+      if(adminList) adminList.innerHTML = '';
+
+      if(myProjects.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-12 text-gray-500 text-sm text-center">No projects added yet. / لا توجد أعمال مضافة حالياً.</div>`;
+      }
+
+      myProjects.forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'p-4 bg-[#121212] rounded-2xl gold-border group overflow-hidden';
+        
+        let mediaHtml = '';
+        if(proj.type === 'video') {
+          if(proj.media.includes('youtube') || proj.media.includes('youtu.be')) {
+            let embedUrl = proj.media.includes('watch?v=') ? proj.media.replace('watch?v=', 'embed/') : proj.media;
+            mediaHtml = `<div class="h-64 rounded-xl overflow-hidden mb-4 bg-black"><iframe src="${embedUrl}" class="w-full h-full" frameborder="0" allowfullscreen></iframe></div>`;
+          } else {
+            mediaHtml = `<div class="h-64 rounded-xl overflow-hidden mb-4 bg-black flex items-center justify-center"><video src="${proj.media}" controls class="max-h-full w-full object-contain"></video></div>`;
+          }
+        } else {
+          mediaHtml = `<div class="h-64 rounded-xl overflow-hidden mb-4 bg-black flex items-center justify-center p-2"><img src="${proj.media}" alt="${proj.title}" class="max-h-full object-contain group-hover:scale-105 transition duration-300"></div>`;
+        }
+
+        card.innerHTML = `
+          ${mediaHtml}
+          <span class="text-xs text-gold-500 border border-gold-500/30 px-3 py-1 rounded-full inline-block mb-2">${proj.category}</span>
+          <h4 class="font-bold text-lg text-gold-400 mb-1">${proj.title}</h4>
+          <p class="text-xs text-gray-400">${proj.desc}</p>
+        `;
+        grid.appendChild(card);
+
+        if(adminList) {
+          const item = document.createElement('div');
+          item.className = 'flex items-center justify-between p-3 bg-[#080808] rounded-xl border border-gold-500/10';
+          item.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="text-xs bg-gold-500 text-black font-bold px-2 py-1 rounded">${proj.type === 'video' ? 'Video' : 'Image'}</span>
+              <div>
+                <h5 class="text-sm font-bold text-white">${proj.title}</h5>
+                <span class="text-xs text-gray-500">${proj.category}</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="editProject(${proj.id})" class="px-3 py-1 bg-gold-500/20 text-gold-400 text-xs rounded-lg">تعديل</button>
+              <button onclick="deleteProject(${proj.id})" class="px-3 py-1 bg-red-500/20 text-red-400 text-xs rounded-lg">حذف</button>
+            </div>
+          `;
+          adminList.appendChild(item);
+        }
+      });
+    }
+
+    function switchTab(tab) {
+      if(tab === 'works') {
+        document.getElementById('tab-works-content').classList.remove('hidden');
+        document.getElementById('tab-settings-content').classList.add('hidden');
+        document.getElementById('tab-works-btn').className = 'text-gold-400 font-bold text-sm pb-1 border-b-2 border-gold-500';
+        document.getElementById('tab-settings-btn').className = 'text-gray-400 text-sm pb-1';
+      } else {
+        document.getElementById('tab-works-content').classList.add('hidden');
+        document.getElementById('tab-settings-content').classList.remove('hidden');
+        document.getElementById('tab-settings-btn').className = 'text-gold-400 font-bold text-sm pb-1 border-b-2 border-gold-500';
+        document.getElementById('tab-works-btn').className = 'text-gray-400 text-sm pb-1';
+      }
+    }
+
+    function openAdminModal() { 
+      document.getElementById('admin-pass').value = '';
+      document.getElementById('admin-modal').classList.remove('hidden'); 
+    }
+    
+    function closeAdminModal() { 
+      document.getElementById('admin-modal').classList.add('hidden'); 
+    }
+
+    function loginAdmin() {
+      const pass = document.getElementById('admin-pass').value;
+      if (pass === 'hesham2026') {
+        document.getElementById('admin-auth-box').classList.add('hidden');
+        document.getElementById('admin-panel-content').classList.remove('hidden');
+        renderPortfolio();
+        applySettings();
+        showToast(currentLang === 'ar' ? 'تم تسجيل الدخول بنجاح' : 'Logged in successfully');
+      } else {
+        // Generic/Silent error handling as requested, no revealing info
+        showToast(currentLang === 'ar' ? 'بيانات غير صحيحة، حاول مجدداً' : 'Invalid credentials, try again');
+        document.getElementById('admin-pass').value = '';
+      }
+    }
+
+    function saveProject(e) {
+      e.preventDefault();
+      const editId = document.getElementById('edit-work-id').value;
+      const title = document.getElementById('work-title').value;
+      const category = document.getElementById('work-category').value;
+      const type = document.getElementById('work-type').value;
+      const desc = document.getElementById('work-desc').value;
+      const urlInput = document.getElementById('work-media-url').value;
+      const fileInput = document.getElementById('work-media-file').files[0];
+
+      const processAndSave = (mediaSrc) => {
+        if(editId) {
+          myProjects = myProjects.map(p => p.id == editId ? { id: Number(editId), title, category, type, desc, media: mediaSrc } : p);
+        } else {
+          myProjects.push({ id: Date.now(), title, category, type, desc, media: mediaSrc });
+        }
+        localStorage.setItem('hesham_projects', JSON.stringify(myProjects));
+        renderPortfolio();
+        resetAdminForm();
+        showToast(currentLang === 'ar' ? 'تم حفظ العمل بنجاح' : 'Project saved successfully');
+      };
+
+      if (fileInput) {
+        const reader = new FileReader();
+        reader.onload = function(evt) { processAndSave(evt.target.result); };
+        reader.readAsDataURL(fileInput);
+      } else {
+        processAndSave(urlInput || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80");
+      }
+    }
+
+    function saveSettings(e) {
+      e.preventDefault();
+      siteSettings.whatsapp = document.getElementById('setting-whatsapp').value;
+      siteSettings.email = document.getElementById('setting-email').value;
+      localStorage.setItem('hesham_settings', JSON.stringify(siteSettings));
+      applySettings();
+      showToast(currentLang === 'ar' ? 'تم تحديث إعدادات التواصل بنجاح' : 'Contact settings updated successfully');
+    }
+
+    function editProject(id) {
+      const proj = myProjects.find(p => p.id === id);
+      if(proj) {
+        document.getElementById('edit-work-id').value = proj.id;
+        document.getElementById('work-title').value = proj.title;
+        document.getElementById('work-category').value = proj.category;
+        document.getElementById('work-type').value = proj.type;
+        document.getElementById('work-desc').value = proj.desc;
+        document.getElementById('work-media-url').value = proj.media;
+        document.getElementById('panel-form-title').innerText = currentLang === 'ar' ? "تعديل العمل" : "Edit Project";
+        document.getElementById('submit-btn').innerText = currentLang === 'ar' ? "حفظ التعديلات" : "Save Changes";
+        document.getElementById('cancel-edit-btn').classList.remove('hidden');
+      }
+    }
+
+    function deleteProject(id) {
+      if(confirm(currentLang === 'ar' ? 'هل أنت متأكد من حذف هذا العمل؟' : 'Are you sure you want to delete this project?')) {
+        myProjects = myProjects.filter(p => p.id !== id);
+        localStorage.setItem('hesham_projects', JSON.stringify(myProjects));
+        renderPortfolio();
+        showToast(currentLang === 'ar' ? 'تم الحذف بنجاح' : 'Deleted successfully');
+      }
+    }
+
+    function resetAdminForm() {
+      document.getElementById('admin-work-form').reset();
+      document.getElementById('edit-work-id').value = '';
+      document.getElementById('panel-form-title').innerText = currentLang === 'ar' ? "إضافة عمل جديد (صورة أو فيديو)" : "Add New Project (Image/Video)";
+      document.getElementById('submit-btn').innerText = currentLang === 'ar' ? "حفظ العمل" : "Save Project";
+      document.getElementById('cancel-edit-btn').classList.add('hidden');
+    }
+
+    function addComment(e) {
+      e.preventDefault();
+      const name = document.getElementById('reviewer-name').value;
+      const rating = document.getElementById('reviewer-rating').value;
+      const text = document.getElementById('reviewer-text').value;
+
+      const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+      const container = document.getElementById('reviews-container');
+
+      const card = document.createElement('div');
+      card.className = 'p-6 bg-[#121212] rounded-xl gold-border text-right';
+      card.innerHTML = `
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-bold text-gold-400">${name}</h4>
+          <div class="text-yellow-500 text-sm">${stars}</div>
+        </div>
+        <p class="text-gray-400 text-sm">${text}</p>
+      `;
+
+      container.prepend(card);
+      document.getElementById('comment-form').reset();
+      showToast(currentLang === 'ar' ? 'تم نشر تعليقك بنجاح' : 'Review published successfully');
+    }
+
+    applyLanguage();
+    applySettings();
+    renderPortfolio();
+  </script>
+</body>
+</html>
